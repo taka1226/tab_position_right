@@ -1,6 +1,3 @@
-// chrome.runtime.onStartup.addListener(function() {
-//     console.log('dfdf');
-// });
 
 //thi is fired when an existing tab is selected.
 chrome.tabs.onActivated.addListener(function(activeInfo){
@@ -26,3 +23,11 @@ chrome.tabs.onCreated.addListener(function(activeInfo) {
         }
     });
 });
+
+
+chrome.runtime.onStartup.addListener(function(){
+    let queryOptions = { active: true, currentWindow: true };
+    chrome.tabs.query(queryOptions, function(tabs){
+        localStorage.setItem("current", tabs[0].id);    //ブラウザを起動したときに tabid を追加
+    })
+})
